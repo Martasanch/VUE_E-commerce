@@ -4,7 +4,11 @@
             <div class="left menu">
               <router-link class="item" to="/">
               <img class="ui small image" src="../assets/logo.svg" alt="Ecommerce"/>
-              <p>Categorías</p>
+              <template v-for="category in categories" :key="category.id">
+                  <router-link class="item" :to="category.slug">
+                      {{category.title}}
+                  </router-link>
+              </template>
               </router-link>
             </div>
             <div class="right menu">
@@ -37,6 +41,7 @@ export default {
         onMounted( async () =>{
            const response = await getCategoriesApi()
            categories.value = response
+           console.log(response)
 
         })
         const logout = () => { 
